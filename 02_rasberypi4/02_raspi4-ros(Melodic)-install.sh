@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/sh
 ## Create 2020/02/16 from T.Ishigami
 
 ## Reffer
