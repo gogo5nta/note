@@ -1,0 +1,39 @@
+■1. Ubuntu server 18.04をインストール
+　参考：Raspberry Pi 4にUbuntu MATEをインストールしてみた
+　　　　https://bigmoro.cocolog-nifty.com/blog/2019/12/post-90eaca.html
+
+　・下記URLでRaspberry Pi 4 > Ubuntu 18.04.4 LTS > 64bitを選択
+　　https://ubuntu.com/download/raspberry-pi
+　　ubuntu-18.04.4-preinstalled-server-arm64+raspi3.img.xzを入手
+
+　・img.xzを解凍(winrarなど利用)
+
+　・imgファイルをWin32 Disk Imagerで上記イメージを焼く
+　　参考：IMG形式のイメージファイルをUSBメモリやSD/CFカードへ書き込める「Win32 Disk Imager」
+　　　　　 https://forest.watch.impress.co.jp/docs/review/1067836.html
+
+■2. userアカウント作成
+　https://qiita.com/white_aspara25/items/c1b9d02310b4731bfbaa
+
+　・ID/PASS  ubuntu / ubuntuでログイン後、パスワードを任意に変更
+
+　・以下のコマンドでsudo可能なuserを作成
+　　$ sudo adduser user_name
+　　$ gpasswd -a user_name sudo
+
+　　参考： ubuntu ユーザを追加して sudo 権限をつける
+　　　　　 
+
+■3. desktopインストール
+　・以下のコマンドでシステムをアップデート
+　　$ sudo apt-get update
+　　$ sudo apt-get upgrade
+
+　・以下のコマンドでデスクトップ環境にMATEをインストール
+　　$ sudo apt-get install ubuntu-mate-desktop
+
+　以下のコマンドにて音声出力をHDMIにします。
+　　amixer -c ALSA cset mumid=3 2
+
+■4. ROSインストール
+
