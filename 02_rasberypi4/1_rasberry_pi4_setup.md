@@ -43,3 +43,23 @@
  $ sudo adduser [user_name]
  $ sudo gpasswd -a [user_name] sudo
 ```
+
+# 3. Ubuntu Mate desktopをインストール
+## 3.1 システムアップデート 
+ 以下のコマンドでシステムをアップデート   
+```
+$ sudo apt-get update
+$ sudo apt-get upgrade
+```
+
+## 3.2 Ubuntu Mateインストール
+　以下のコマンドでUbuntu Mate desktopをインストール   
+```
+$ sudo apt-get install ubuntu-mate-desktop
+```
+
+## 3.3 音声出力をHDMiに設定
+　以下のコマンドで音声出力をHDMIに設定   
+```
+amixer -c ALSA cset mumid=3 2
+```
