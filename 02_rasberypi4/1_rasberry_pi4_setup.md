@@ -129,5 +129,22 @@ echo “source ~/catkin_workspace/devel/setup.bash” >> ~/.bashrc
 ## Step 11: Check the ROS environment variables
 export | grep ROS
 ```
-   
-  
+
+# 5. 環境構築(ソフト)
+## 5.1 よく使うソフト(chromium-browzer)のインストール
+　chromium-browzerをインストール。ここも参考に[Ubuntu 18.04: ウェブブラウザのChromiumをインストールする](https://www.hiroom032.com/2018/05/04/ubuntu-1804-chromium-ja/)   
+```
+$ sudo apt-get install chromium-browzer
+```
+![03_Chromium](https://user-images.githubusercontent.com/30023363/75156952-821d8c80-5756-11ea-891a-359bcf59b6a8.png)   
+
+## 5.2 よく使うソフト(Terminator)のインストール
+　Terminatorをインストール。ここも参考に[Ubuntu初心者がROSを使うときにおすすめのターミナル「terminator」](http://cryborg.hatenablog.com/entry/2016/09/03/164940)   
+```
+$ sudo apt-get install terminator
+```
+![03_terminator](https://user-images.githubusercontent.com/30023363/75157474-88603880-5757-11ea-8f90-d10a59908224.png)   
+
+## 5.3 キーボードのレイアウト変更(JPキーボード)
+　Ubuntu MateのMenu > Contorol Center > KeyBoardを選択し、AddでJapanを追加後、一番上に移動   
+ ![03_keyboard](https://user-images.githubusercontent.com/30023363/75157546-afb70580-5757-11ea-9c20-6e45df781885.png)   
