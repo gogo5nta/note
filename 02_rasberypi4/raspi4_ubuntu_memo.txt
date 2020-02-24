@@ -1,39 +1,42 @@
-¡1. Ubuntu server 18.04‚ğƒCƒ“ƒXƒg[ƒ‹
-@QlFRaspberry Pi 4‚ÉUbuntu MATE‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚İ‚½
-@@@@https://bigmoro.cocolog-nifty.com/blog/2019/12/post-90eaca.html
+â– 1. Ubuntu server 18.04ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+ã€€å‚è€ƒï¼šRaspberry Pi 4ã«Ubuntu MATEã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ã¿ãŸ
+ã€€ã€€ã€€ã€€https://bigmoro.cocolog-nifty.com/blog/2019/12/post-90eaca.html
 
-@E‰º‹LURL‚ÅRaspberry Pi 4 > Ubuntu 18.04.4 LTS > 64bit‚ğ‘I‘ğ
-@@https://ubuntu.com/download/raspberry-pi
-@@ubuntu-18.04.4-preinstalled-server-arm64+raspi3.img.xz‚ğ“üè
+ã€€ãƒ»ä¸‹è¨˜URLã§Raspberry Pi 4 > Ubuntu 18.04.4 LTS > 64bitã‚’é¸æŠ
+ã€€ã€€https://ubuntu.com/download/raspberry-pi
+ã€€ã€€ubuntu-18.04.4-preinstalled-server-arm64+raspi3.img.xzã‚’å…¥æ‰‹
 
-@Eimg.xz‚ğ‰ğ“€(winrar‚È‚Ç—˜—p)
+ã€€ãƒ»img.xzã‚’è§£å‡(winrarãªã©åˆ©ç”¨)
 
-@Eimgƒtƒ@ƒCƒ‹‚ğWin32 Disk Imager‚Åã‹LƒCƒ[ƒW‚ğÄ‚­
-@@QlFIMGŒ`®‚ÌƒCƒ[ƒWƒtƒ@ƒCƒ‹‚ğUSBƒƒ‚ƒŠ‚âSD/CFƒJ[ƒh‚Ö‘‚«‚ß‚éuWin32 Disk Imagerv
-@@@@@ https://forest.watch.impress.co.jp/docs/review/1067836.html
+ã€€ãƒ»imgãƒ•ã‚¡ã‚¤ãƒ«ã‚’Win32 Disk Imagerã§ä¸Šè¨˜ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ç„¼ã
+ã€€ã€€å‚è€ƒï¼šIMGå½¢å¼ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ•ã‚¡ã‚¤ãƒ«ã‚’USBãƒ¡ãƒ¢ãƒªã‚„SD/CFã‚«ãƒ¼ãƒ‰ã¸æ›¸ãè¾¼ã‚ã‚‹ã€ŒWin32 Disk Imagerã€
+ã€€ã€€ã€€ã€€ã€€ https://forest.watch.impress.co.jp/docs/review/1067836.html
 
-¡2. userƒAƒJƒEƒ“ƒgì¬
-@https://qiita.com/white_aspara25/items/c1b9d02310b4731bfbaa
+ã€€ãƒ»usercfg.txtã«è¨˜è¼‰ã€‚ã“ã‚Œã‚’è¡Œã‚ãªã„ã¨HDMIã‹ã‚‰éŸ³ãŒã§ãªã„ã€‚å‚è€ƒï¼š https://bigmoro.cocolog-nifty.com/blog/2019/12/post-90eaca.html
+ã€€ã€€dtparam=audio=on
 
-@EID/PASS  ubuntu / ubuntu‚ÅƒƒOƒCƒ“ŒãAƒpƒXƒ[ƒh‚ğ”CˆÓ‚É•ÏX
+â– 2. userã‚¢ã‚«ã‚¦ãƒ³ãƒˆä½œæˆ
+ã€€https://qiita.com/white_aspara25/items/c1b9d02310b4731bfbaa
 
-@EˆÈ‰º‚ÌƒRƒ}ƒ“ƒh‚Åsudo‰Â”\‚Èuser‚ğì¬
-@@$ sudo adduser user_name
-@@$ gpasswd -a user_name sudo
+ã€€ãƒ»ID/PASS  ubuntu / ubuntuã§ãƒ­ã‚°ã‚¤ãƒ³å¾Œã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ä»»æ„ã«å¤‰æ›´
 
-@@QlF ubuntu ƒ†[ƒU‚ğ’Ç‰Á‚µ‚Ä sudo Œ ŒÀ‚ğ‚Â‚¯‚é
-@@@@@ 
+ã€€ãƒ»ä»¥ä¸‹ã®ã‚³ãƒãƒ³ãƒ‰ã§sudoå¯èƒ½ãªuserã‚’ä½œæˆ
+ã€€ã€€$ sudo adduser user_name
+ã€€ã€€$ gpasswd -a user_name sudo
 
-¡3. desktopƒCƒ“ƒXƒg[ƒ‹
-@EˆÈ‰º‚ÌƒRƒ}ƒ“ƒh‚ÅƒVƒXƒeƒ€‚ğƒAƒbƒvƒf[ƒg
-@@$ sudo apt-get update
-@@$ sudo apt-get upgrade
+ã€€ã€€å‚è€ƒï¼š ubuntu ãƒ¦ãƒ¼ã‚¶ã‚’è¿½åŠ ã—ã¦ sudo æ¨©é™ã‚’ã¤ã‘ã‚‹
+ã€€ã€€ã€€ã€€ã€€ 
 
-@EˆÈ‰º‚ÌƒRƒ}ƒ“ƒh‚ÅƒfƒXƒNƒgƒbƒvŠÂ‹«‚ÉMATE‚ğƒCƒ“ƒXƒg[ƒ‹
-@@$ sudo apt-get install ubuntu-mate-desktop
+â– 3. desktopã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+ã€€ãƒ»ä»¥ä¸‹ã®ã‚³ãƒãƒ³ãƒ‰ã§ã‚·ã‚¹ãƒ†ãƒ ã‚’ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
+ã€€ã€€$ sudo apt-get update
+ã€€ã€€$ sudo apt-get upgrade
 
-@ˆÈ‰º‚ÌƒRƒ}ƒ“ƒh‚É‚Ä‰¹ºo—Í‚ğHDMI‚É‚µ‚Ü‚·B
-@@amixer -c ALSA cset mumid=3 2
+ã€€ãƒ»ä»¥ä¸‹ã®ã‚³ãƒãƒ³ãƒ‰ã§ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ç’°å¢ƒã«MATEã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+ã€€ã€€$ sudo apt-get install ubuntu-mate-desktop
 
-¡4. ROSƒCƒ“ƒXƒg[ƒ‹
+ã€€ä»¥ä¸‹ã®ã‚³ãƒãƒ³ãƒ‰ã«ã¦éŸ³å£°å‡ºåŠ›ã‚’HDMIã«ã—ã¾ã™ã€‚
+ã€€ã€€amixer -c ALSA cset mumid=3 2
+
+â– 4. ROSã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 
