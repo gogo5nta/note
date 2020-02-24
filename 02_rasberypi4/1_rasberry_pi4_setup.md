@@ -159,7 +159,14 @@ $ sudo apt-get install terminator
    Keyboard input method system:」に「fcitx」か確認。
    ![03_Lang4](https://user-images.githubusercontent.com/30023363/75158580-c4949880-5759-11ea-84ba-9fb86193fec5.png)   
    
-   その後、タブ「Regional Formats」を開き、画像のように「日本語」を選択し、「Apply System Wide」をクリックして確定
+   その後、タブ「Regional Formats」を開き、画像のように「日本語」を選択し、「Apply System Wide」をクリックして確定   
    ![03_Lang5](https://user-images.githubusercontent.com/30023363/75158613-d4ac7800-5759-11ea-90ab-5254689747c3.png)   
+
+   次に、再起動後、Ubuntu MateのMenu > Contorol Center > Fcitx設定を選択   
+   ![03_Lang5](https://user-images.githubusercontent.com/30023363/75159401-67014b80-575b-11ea-9ca1-91d2e5b4b02d.png)   
+   
+   入力メソッドの設定 > 全体の設定 > 入力メソッドのオンオフで、ctlr+spaceの隣を選択し、半角/全角ボタンを押す。   
+   これで、半角/全角ボタンで日本語入力をOn/Off可能。
+   ![03_Lang6](https://user-images.githubusercontent.com/30023363/75159424-784a5800-575b-11ea-9306-5695a84e6e2b.png)
 
    
