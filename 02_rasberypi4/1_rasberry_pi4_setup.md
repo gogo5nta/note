@@ -17,4 +17,8 @@
 ・[Ubuntu.com](https://ubuntu.com/download/raspberry-pi)  
   上記サイトより、Raspberry Pi 4 > Ubuntu 18.04.4 LTS > 64bitを選択。ubuntu-18.04.4-preinstalled-server-arm64+raspi3.img.xzを入手。 
   ![01_ubuntu_image_dl](https://user-images.githubusercontent.com/30023363/75144985-7c667d80-573b-11ea-9e8d-d44cbe24e2c4.jpg)　　
-  [winrar](https://www.winrarjapan.com/download)などを用いて、xzを解凍し、ubuntu-18.04.4-preinstalled-server-arm64+raspi3.imgを入手
+  [winrar](https://www.winrarjapan.com/download)などを用いて、xzを解凍し、ubuntu-18.04.4-preinstalled-server-arm64+raspi3.imgを入手  
+## 2.2 imgファイルをWin32 Disk Imagerで焼く
+・[窓の杜 Win32 Disk Imager](https://forest.watch.impress.co.jp/docs/review/1067836.html)  
+  上記サイトより、Win32 Disk Imagerを入手し、2.1で入手し解凍したimgファイルをmicorSDに焼く　　
+  ![01_win32DiskImage_write_imgfile](https://user-images.githubusercontent.com/30023363/75145666-bbe19980-573c-11ea-92a4-12cd6f516025.jpg)　　
