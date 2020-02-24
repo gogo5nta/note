@@ -32,3 +32,14 @@
   上記サイトより、Win32 Disk Imagerを入手し、2.1で入手し解凍したimgファイルをmicorSDに焼く　　
   ![01_win32DiskImage_write_imgfile](https://user-images.githubusercontent.com/30023363/75145666-bbe19980-573c-11ea-92a4-12cd6f516025.jpg)　　
 
+## 2.3 Ubuntu server 18.04のセットアップ
+　購入したセットに付属のACアダプタ(5V_3A)と、HDMIとキーボードをrasberry pi4に接続し、2.2で焼いたMicroSDを差し込んだ後、
+ 電源をOnにすると、以下の画面が表示される。   
+![02_ubuntu_server_first_login](https://user-images.githubusercontent.com/30023363/75147060-cb161680-573f-11ea-9844-694a127147ae.jpg)   
+　[ID / PASS]  ubuntu / ubuntuでログイン後、パスワードを任意に変更。
+### 2.3.1 userアカウントを作成
+　以下のコマンドでsudo可能なuser[user_name]を作成。[参考ページはここ](https://qiita.com/white_aspara25/items/c1b9d02310b4731bfbaa)   
+ '''
+ $ sudo adduser [user_name]
+ $ sudo gpasswd -a [user_name] sudo
+ '''
