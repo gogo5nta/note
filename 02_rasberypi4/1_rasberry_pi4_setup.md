@@ -34,6 +34,7 @@
 
 ## 2.3 microSd内のusercfg.txtを設定
 microSDをWindows PCから取り出す前に、microSDにある"usercfg.txt"に以下の１行を追加。これを実行しないと音声が出力されない。   
+dtparam=audio=on   
 詳細はここ[Raspberry Pi 4にUbuntu MATEをインストールしてみた。HDMIから音が出ない？問題も解決](https://bigmoro.cocolog-nifty.com/blog/2019/12/post-90eaca.html)   
 
 ## 2.4 Ubuntu server 18.04のセットアップ
