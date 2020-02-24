@@ -39,7 +39,7 @@
 　[ID / PASS]  ubuntu / ubuntuでログイン後、パスワードを任意に変更。
 ### 2.3.1 userアカウントを作成
 　以下のコマンドでsudo可能なuser[user_name]を作成。[参考ページはここ](https://qiita.com/white_aspara25/items/c1b9d02310b4731bfbaa)   
- '''
+```
  $ sudo adduser [user_name]
  $ sudo gpasswd -a [user_name] sudo
- '''
+```
