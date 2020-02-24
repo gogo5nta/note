@@ -59,13 +59,13 @@ $ sudo apt-get upgrade
 ```
 
 ## 3.2 Ubuntu Mateインストール
-　以下のコマンドでUbuntu Mate desktopをインストール   
+　以下のコマンドでUbuntu Mate desktopをインストールし、再起動   
 ```
 $ sudo apt-get install ubuntu-mate-desktop
 ```
 
 ## 3.3 音声出力をHDMiに設定
-　以下のコマンドで音声出力をHDMIに設定   
+　Ubuntu MateになってもそのままだとHDMIから音が出ていない以下のコマンドで音声出力をHDMIに設定   
 ```
 amixer -c ALSA cset mumid=3 2
 ```
