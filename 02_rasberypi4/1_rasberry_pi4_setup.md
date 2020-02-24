@@ -148,3 +148,18 @@ $ sudo apt-get install terminator
 ## 5.3 キーボードのレイアウト変更(JPキーボード)
 　Ubuntu MateのMenu > Contorol Center > KeyBoardを選択し、AddでJapanを追加後、一番上に移動   
  ![03_keyboard](https://user-images.githubusercontent.com/30023363/75157546-afb70580-5757-11ea-9c20-6e45df781885.png)   
+ 
+## 5.4 日本語入力の設定
+　・[Live USB『Ubuntu MATE 18.10』日本語化も簡単…設定も保存可能！](https://report.hot-cafe.net/ubuntumate-1810-liveusb-6659)  
+ 　上記を参考に日本語設定を実施。   
+  
+   まず、Ubuntu MateのMenu > Contorol Center > Language Supportを選択。   
+   次に、install/Remove Languagesを選択し、English」と「Japanese」以外のチェックをはずす。   
+   その後、ウインドウ内の一番下の「日本語」を、つまむ形でドラッグして「English」の上に持って行き、「Apply System Wide」をクリックして確定。
+   Keyboard input method system:」に「fcitx」か確認。
+   ![03_Lang4](https://user-images.githubusercontent.com/30023363/75158580-c4949880-5759-11ea-84ba-9fb86193fec5.png)   
+   
+   その後、タブ「Regional Formats」を開き、画像のように「日本語」を選択し、「Apply System Wide」をクリックして確定
+   ![03_Lang5](https://user-images.githubusercontent.com/30023363/75158613-d4ac7800-5759-11ea-90ab-5254689747c3.png)   
+
+   
