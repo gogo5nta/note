@@ -36,6 +36,7 @@
 microSDをWindows PCから取り出す前に、microSDにある"usercfg.txt"に以下の１行を追加。これを実行しないと音声が出力されない。   
 dtparam=audio=on   
 詳細はここ[Raspberry Pi 4にUbuntu MATEをインストールしてみた。HDMIから音が出ない？問題も解決](https://bigmoro.cocolog-nifty.com/blog/2019/12/post-90eaca.html)   
+![01_usercfg_add](https://user-images.githubusercontent.com/30023363/75148499-209ff280-5743-11ea-884e-fa1ff9338db3.jpg)   
 
 ## 2.4 Ubuntu server 18.04のセットアップ
 　購入したセットに付属のACアダプタ(5V_3A)と、HDMIとキーボードをrasberry pi4に接続し、2.2で焼いたMicroSDを差し込んだ後、
