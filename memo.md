@@ -24,6 +24,10 @@ case $TERM in
 esac
 ```
 
+# ■VirtualGL + VNC によるリモートOpenGL(おすすめ)
+　・[OpenGL Remote](https://geraniums.hatenablog.com/entry/2018/05/25/151153)   
+    
+
 # ■Ubuntu 16.04にdrive、CUDA、cnDNNをインストール
 　・[Ubuntu 16.04 をインストールして NVIDIAドライバ (410.48)と CUDA10.0 と cuDNN7.4.1 を入れて Tensorflow-gpu を動かすメモ]   
 　(https://qiita.com/konzo_/items/3e2d1d7480f7ef632603)      
