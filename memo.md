@@ -1,3 +1,11 @@
+# ■Unityの便利ツールをインストール
+　・[Unity Tweak Tool](https://kledgeb.blogspot.com/2013/07/ubuntu-unity-tweak-tool-1-unityuiunity.html)   
+　Unity Tweak Toolをインストールすると、細かい調整が楽   
+```
+sudo apt-get install unity-tweak-tool
+```
+![UnityTweakTool_UI](https://user-images.githubusercontent.com/30023363/75627245-e5556600-5c11-11ea-82e8-86bcbac368db.jpg)   
+
 # ■Ubuntu 16.04 のCUIでの文字化けを直す   
 　・[Ubuntu 16.04 のCUIでの文字化け を直すメモ - Qiita](https://qiita.com/konzo_/items/65c1679645ba42d347fb)   
 
