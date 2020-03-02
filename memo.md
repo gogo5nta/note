@@ -28,27 +28,29 @@ esac
 　・[OpenGL Remote](https://geraniums.hatenablog.com/entry/2018/05/25/151153)  
   ・[Ubuntu 18.04にGeForceを積んで遊んでみる](https://qiita.com/exthnet/items/dcb0bd94f09a2b4c9835)   
  ```
- # install virtualgl
- sudo dpkg -i virtualgl_*_amd64.deb
+# install virtualgl
+sudo dpkg -i virtualgl_*_amd64.deb
  
- # stop lightdm
- sudo systemctl stop lightdm
+# stop lightdm
+# Ctl + Alt + F1でCUIに移動。事前に文字化け対策必要
+sudo systemctl stop lightdm
  
- # setup virtualgl
- # 途中の質問は右を参考 https://virtualgl.org/vgldoc/2_2_1/#hd005001
- # 1, y, y, y, x 
- sudo /opt/VirtualGL/bin/vglserver_config
+# setup virtualgl
+# 途中の質問は右を参考 https://virtualgl.org/vgldoc/2_2_1/#hd005001
+# 1, y, y, y, x 
+sudo /opt/VirtualGL/bin/vglserver_config
 
 # start lightdm
 sudo systemctl start lightdm
 xauth merge /etc/opt/VirtualGL/vgl_xauth_key
 
- # install turboVNC
- sudo dpkg -i turbovnc_*_amd64.deb
+# GUIに移動
+# install turboVNC
+sudo dpkg -i turbovnc_*_amd64.deb
  
- # start turboVNC
- # 初回はパスワード登録。パスワード文字列長が8に制限されているのに注意
- /opt/TurboVNC/bin/vncserver -depth 24
+# start turboVNC
+# 初回はパスワード登録。パスワード文字列長が8に制限されているのに注意
+/opt/TurboVNC/bin/vncserver -depth 24
  
  ```
     
