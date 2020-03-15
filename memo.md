@@ -53,19 +53,21 @@ source ~/.bashrc
 ・[The .deb package for VirtualGL on sourceforge (latest version: 2.6.3)](https://sourceforge.net/projects/virtualgl/files/)   
 ・[The .deb package for TurboVNC on sourceforge (latest version: 2.2.4)](https://sourceforge.net/projects/turbovnc/files/)   
 
-## install virtualgl
+## Install and Setting
+```
+# install virtualgl
 sudo dpkg -i virtualgl_*_amd64.deb
  
-## stop lightdm
+# stop lightdm
 # Ctl + Alt + F1でCUIに移動。事前に文字化け対策必要
 sudo systemctl stop lightdm
  
-## setup virtualgl
+# setup virtualgl
 # 途中の質問は右を参考 https://virtualgl.org/vgldoc/2_2_1/#hd005001
 # 1, y, y, y, x 
 sudo /opt/VirtualGL/bin/vglserver_config
 
-## start lightdm
+# start lightdm
 sudo systemctl start lightdm
 xauth merge /etc/opt/VirtualGL/vgl_xauth_key
 
@@ -76,8 +78,7 @@ sudo dpkg -i turbovnc_*_amd64.deb
 # start turboVNC
 # 初回はパスワード登録。パスワード文字列長が8に制限されているのに注意
 /opt/TurboVNC/bin/vncserver -depth 24
- 
- ```
+```
     
 # ■Ubuntu 16.04にdrive、CUDA、cnDNNをインストール
 　・[Ubuntu 16.04 をインストールして NVIDIAドライバ (410.48)と CUDA10.0 と cuDNN7.4.1 を入れて Tensorflow-gpu を動かすメモ]   
