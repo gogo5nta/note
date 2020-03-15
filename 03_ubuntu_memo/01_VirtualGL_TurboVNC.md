@@ -1,12 +1,12 @@
-# ¡VirtualGL + TurboVNC ‚É‚æ‚éƒŠƒ‚[ƒgOpenGL(‚¨‚·‚·‚ß)
-@E[OpenGL Remote](https://geraniums.hatenablog.com/entry/2018/05/25/151153)  
-  E[Ubuntu 18.04‚ÉGeForce‚ğÏ‚ñ‚Å—V‚ñ‚Å‚İ‚é](https://qiita.com/exthnet/items/dcb0bd94f09a2b4c9835)   
-## ¡Ubuntu 16.04 ‚ÌCUI‚Å‚Ì•¶š‰»‚¯‚ğ’¼‚·
+# â– VirtualGL + TurboVNC ã«ã‚ˆã‚‹ãƒªãƒ¢ãƒ¼ãƒˆOpenGL(ãŠã™ã™ã‚)
+ã€€ãƒ»[OpenGL Remote](https://geraniums.hatenablog.com/entry/2018/05/25/151153)  
+  ãƒ»[Ubuntu 18.04ã«GeForceã‚’ç©ã‚“ã§éŠã‚“ã§ã¿ã‚‹](https://qiita.com/exthnet/items/dcb0bd94f09a2b4c9835)   
+## â– Ubuntu 16.04 ã®CUIã§ã®æ–‡å­—åŒ–ã‘ã‚’ç›´ã™
 ```
 nano ~/.bashrc
 ```
-@•¶––‚Ü‚ÅˆÚ“®‚µ‚ÄCˆÈ‰º‚Ì•¶‚ğ“ü—Í   
-@I—¹‚Íctrl+x‚Å•Û‘¶
+ã€€æ–‡æœ«ã¾ã§ç§»å‹•ã—ã¦ï¼Œä»¥ä¸‹ã®æ–‡ã‚’å…¥åŠ›   
+ã€€çµ‚äº†ã¯ctrl+xã§ä¿å­˜
 
 ```
 case $TERM in
@@ -14,14 +14,14 @@ case $TERM in
       *)       LANG=ja_JP.UTF-8;;
 esac
 ```
-ˆÈ‰º‚ÌƒR[ƒh‚Å”½‰f   
+ä»¥ä¸‹ã®ã‚³ãƒ¼ãƒ‰ã§åæ˜    
 ```
 source ~/.bashrc
 ``` 
 
 ## Get Virtualgl and TurboNVC
-E[The .deb package for VirtualGL on sourceforge (latest version: 2.6.3)](https://sourceforge.net/projects/virtualgl/files/)   
-E[The .deb package for TurboVNC on sourceforge (latest version: 2.2.4)](https://sourceforge.net/projects/turbovnc/files/)   
+ãƒ»[The .deb package for VirtualGL on sourceforge (latest version: 2.6.3)](https://sourceforge.net/projects/virtualgl/files/)   
+ãƒ»[The .deb package for TurboVNC on sourceforge (latest version: 2.2.4)](https://sourceforge.net/projects/turbovnc/files/)   
 
 ## Install and Setting
 ```
@@ -29,11 +29,11 @@ source ~/.bashrc
 sudo dpkg -i virtualgl_*_amd64.deb
  
 # stop lightdm
-# Ctl + Alt + F1‚ÅCUI‚ÉˆÚ“®B–‘O‚É•¶š‰»‚¯‘Îô•K—v
+# Ctl + Alt + F1ã§CUIã«ç§»å‹•ã€‚äº‹å‰ã«æ–‡å­—åŒ–ã‘å¯¾ç­–å¿…è¦
 sudo systemctl stop lightdm
  
 # setup virtualgl
-# “r’†‚Ì¿–â‚Í‰E‚ğQl https://virtualgl.org/vgldoc/2_2_1/#hd005001
+# é€”ä¸­ã®è³ªå•ã¯å³ã‚’å‚è€ƒ https://virtualgl.org/vgldoc/2_2_1/#hd005001
 # 1, y, y, y, x 
 sudo /opt/VirtualGL/bin/vglserver_config
 
@@ -41,15 +41,20 @@ sudo /opt/VirtualGL/bin/vglserver_config
 sudo systemctl start lightdm
 xauth merge /etc/opt/VirtualGL/vgl_xauth_key
 
-# GUI‚ÉˆÚ“®
+# GUIã«ç§»å‹•
 # install turboVNC
 sudo dpkg -i turbovnc_*_amd64.deb
  
 # start TurboVNC
-# ‰‰ñ‚ÍƒpƒXƒ[ƒh“o˜^BƒpƒXƒ[ƒh•¶š—ñ’·‚ª8‚É§ŒÀ‚³‚ê‚Ä‚¢‚é‚Ì‚É’ˆÓ
+# åˆå›ã¯ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ç™»éŒ²ã€‚ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰æ–‡å­—åˆ—é•·ãŒ8ã«åˆ¶é™ã•ã‚Œã¦ã„ã‚‹ã®ã«æ³¨æ„
 /opt/TurboVNC/bin/vncserver -depth 24
 
 # make alias
-# turbovnc‚Ì‹N“®ƒGƒCƒŠƒAƒX‚ğì¬. nano ~/.bashrc‚ğÀs‚µ
+# turbovncã®èµ·å‹•ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã‚’ä½œæˆ. nano ~/.bashrcã‚’å®Ÿè¡Œã—
 alias TVNC='/opt/TurboVNC/bin/vncserver -depth 24' 
 ```
+
+# windowsä¸Šã§VirtualGL + TurboVNC ã«ã‚ˆã‚‹ãƒªãƒ¢ãƒ¼ãƒˆOpenGL (gazeboã‚‚å‹•ãã‚ˆï¼)
+ä»¥ä¸‹ã®å ´æ‰€ã‹ã‚‰windowsç‰ˆã®TurboVNC(TurboVNC-2.2.4-x64.exeãªã©)ã‚’å…¥æ‰‹ã—ã€ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«   
+ãƒ»[The .deb package for TurboVNC on sourceforge (latest version: 2.2.4)](https://sourceforge.net/projects/turbovnc/files/)   
+æ¥ç¶šã™ã‚‹éš›ã€/opt/TurboVNC/bin/vncserver -depth 24ã®åˆå›èµ·å‹•ã§ä½œæˆã—ãŸãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å…¥åŠ›
