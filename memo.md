@@ -75,9 +75,13 @@ xauth merge /etc/opt/VirtualGL/vgl_xauth_key
 # install turboVNC
 sudo dpkg -i turbovnc_*_amd64.deb
  
-# start turboVNC
+# start TurboVNC
 # 初回はパスワード登録。パスワード文字列長が8に制限されているのに注意
 /opt/TurboVNC/bin/vncserver -depth 24
+
+# make alias
+# turbovncの起動エイリアスを作成. nano ~/.bashrcを実行し
+alias TVNC='/opt/TurboVNC/bin/vncserver -depth 24' 
 ```
     
 # ■Ubuntu 16.04にdrive、CUDA、cnDNNをインストール
