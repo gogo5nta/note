@@ -1,0 +1,212 @@
+
+# --------------------------------------------------------
+# Ubuntu18.04にNVIDIA Container Toolkitをインストールする
+# https://qiita.com/Wisteria30/items/6f1e35e600e93ff2c54b
+# --------------------------------------------------------
+# HP通りやる。ただしcuda-10-1と指定
+# URL：https://qiita.com/Wisteria30/items/6f1e35e600e93ff2c54b
+# URL: https://medium.com/@exesse/cuda-10-1-installation-on-ubuntu-18-04-lts-d04f89287130
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+sudo apt-get update
+# 自動で合うdriverを入れてくれる
+# sudo ubuntu-drivers autoinstallだと435, 以下コマンドだと418のインストールを確認
+sudo apt-get -y install cuda-drivers
+sudo apt-get -y install cuda-10-1
+
+# 以下を.bashrcに追加
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+
+# 再起動
+$ sudo reboot
+
+# 確認(nvidia driver)
+$ nvidia-smi
+
+# 確認(nvidia cuda)
+$ nvcc -V
+
+# Dockerをインストール
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD8
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io -y
+
+# 確認(Docker)
+sudo docker run hello-world
+
+# 確認(Docker version)
+$ docker -v
+Docker version 19.03.4, build 9013bf583a
+
+# --------------------------------------------------------
+# NVIDIA container toolkitを使って、dockerのコンテナ上でcudaを動かす
+# URL:https://qiita.com/Hiroaki-K4/items/c1be8adba18b9f0b4cef
+# --------------------------------------------------------
+# 環境
+# Ubuntu 18.04
+# docker 19.03
+# nvidia driver 450.36
+
+# Add the package repositories
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+
+# 確認(docker --gpus)
+sudo docker run --gpus all nvidia/cuda:10.1-base-ubuntu18.04 nvidia-smi
+
+# Dockerコマンドをsudoなしで実行する方法
+# URL:https://qiita.com/DQNEO/items/da5df074c48b012152ee
+# dockerグループがなければ作る
+sudo groupadd docker
+
+# 現行ユーザをdockerグループに所属させる
+sudo gpasswd -a $USER docker
+
+# dockerデーモンを再起動する (CentOS7の場合)
+sudo systemctl restart docker
+
+# exitして再ログインすると反映される。
+exit
+
+# --------------------------------------------------------
+# other1：ubuntu18.04 RDP(Windows 10)
+# URL1: https://qiita.com/exthnet/items/dcb0bd94f09a2b4c9835
+# URL2: https://qiita.com/Shunmo17/items/c2e21af5d5f609c01b08
+# URL3: https://geraniums.hatenablog.com/entry/2018/05/25/151153
+# --------------------------------------------------------
+# GPU搭載PCの場合、xrdpではハードウェアアクセラレーションが効きません。GPUを利用する場合VNCを利用
+# VirtualGL_TurboVNC
+
+#Get Virtualgl and TurboNVC (2020.08.23)
+#・The .deb package for VirtualGL on sourceforge (latest version: 2.6.4)
+#  URL: https://sourceforge.net/projects/virtualgl/files/
+
+#・The .deb package for TurboVNC on sourceforge (latest version: 2.2.5)
+#  URL: https://sourceforge.net/projects/turbovnc/files/
+
+# install virtualgl
+sudo dpkg -i virtualgl_*_amd64.deb
+ 
+# stop desktop
+# --- ubuntu 16.04 ---
+# Ctl + Alt + F1でCUIに移動。事前に文字化け対策必要
+# sudo systemctl stop lightdm
+
+# --- ubuntu 18.04 ---
+# Ctl + Alt + F3でCUIに移動。事前に文字化け対策必要
+$ systemctl isolate multi-user.target
+ 
+# setup virtualgl
+# 途中の質問は右を参考 https://virtualgl.org/vgldoc/2_2_1/#hd005001
+# 1, y, y, y, x 
+sudo /opt/VirtualGL/bin/vglserver_config
+
+# 失敗するが一応実施
+#$ sudo rmmod nvidia
+#$ sudo rmmod nvidia_modeset
+#$ sudo rmmod nvidia_modeset_drm
+
+# start desktop
+# --- ubuntu 16.04 ---
+# sudo systemctl start lightdm
+
+# --- ubuntu 18.04 ---
+$ systemctl start graphical.target
+
+# おまじない（やらなくていい？)
+# $ xauth merge /etc/opt/VirtualGL/vgl_xauth_key
+
+# GUIに移動
+# install turboVNC
+sudo dpkg -i turbovnc_*_amd64.deb
+ 
+# start TurboVNC
+# 初回はパスワード登録。パスワード文字列長が8に制限されているのに注意
+/opt/TurboVNC/bin/vncserver -depth 24
+
+# make alias
+# turbovncの起動エイリアスを作成. nano ~/.bashrcを実行し
+alias TVNC='/opt/TurboVNC/bin/vncserver -depth 24' 
+
+# (その他)自動起動
+# 自動起動するアプリケーションを選択。ボックスの右側にあるAddをクリック
+#     名前: start turbovnc
+# コマンド: /opt/TurboVNC/bin/vncserver -depth 24
+#     説明: TurboVNCの起動
+
+# --------------------------------------------------------
+# 参考1：必要なら実施
+# --------------------------------------------------------
+# 日本語フォルダ準備
+$ LANG=C xdg-user-dirs-gtk-update
+
+# (参考)旧verのdriverを削除(必要ならば)
+sudo rm /etc/apt/sources.list.d/cuda*
+sudo apt-get --purge remove nvidia-*
+sudo apt-get --purge remove cuda-*
+
+# (参考)CUIで文字化け修正
+# 文末まで移動して，以下の文を入力
+# 終了はctrl+xで保存
+$ nano ~/.bashrc
+---------
+case $TERM in
+      linux) LANG=C ;;
+      *)       LANG=ja_JP.UTF-8;;
+esac
+----------
+
+# (参考)Nouveauドライバーの確認、無効化(必要ならば)
+# URL: https://qiita.com/sasayabaku/items/2323a2c501e58c0621b6
+$ lsmod | grep -i nouveau
+$ gedit /etc/modprobe.d/blacklist-nouveau.conf
+--- 中身 ---
+blacklist nouveau
+options nouveau modeset=0
+------------
+sudo update-initramfs -u
+
+# --------------------------------------------------------
+# 参考2：CUIでnvidia driverインストール(nomodesetで起動したとき)
+# --------------------------------------------------------
+# CUIモードに
+ctl + alt + F3でCUI
+
+# GUIを停止
+$ systemctl isolate multi-user.target
+
+# nvidia driverを削除
+$ sudo apt --purge autoremove nvidia*
+
+# nvidia driverをインストール
+$ sudo add-apt-repository ppa:graphics-drivers/ppa
+$ sudo apt update
+$ sudo apt install nvidia-driver-450
+
+# GUIを起動
+$ systemctl start graphical.target
+
+#■参考
+# CUI移動
+# https://qastack.jp/ubuntu/1033206/switch-to-console-in-ubuntu-18-04-how-to-leave-gui
+
+# GUIを停止
+# https://codechacha.com/ja/install-nvidia-driver-ubuntu/
+
+# nvidia driverインストール
+# https://qiita.com/kawazu191128/items/8a46308be6949f5bda57
+
+# [Ubuntu]CUDAを入れたら画面が真っ黒になった話
+# https://qiita.com/mdo4nt6n/items/b439b81e7c10b95ee7c5
