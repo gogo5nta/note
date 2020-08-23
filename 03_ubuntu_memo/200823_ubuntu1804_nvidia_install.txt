@@ -1,0 +1,36 @@
+# ---------------------------------------------------
+# UEFIでubuntu18.04(nvidiaグラボ)をインストール
+# ---------------------------------------------------
+
+# 1. ubuntu18.04インストーラー起動まで(黒画面で止まるなら)
+# https://qiita.com/bohemian916/items/8c7f0c4b3d3ea0958559
+# インストーラー(without install)を起動する途中で「e」ボタンを押し、
+# quiet splash > nomodesetに変更。F10で起動
+
+
+# 2. 文字フォントを調整(nomodesetでインストール時に必要)
+# https://magidropack.hatenablog.com/entry/2018/10/25/182817
+# インストールする前に、以下をコマンドからインストールし実行
+# フォントサイズを1.0 > 0.6に
+
+$ sudo apt install gnome-tweaks
+
+# 3. 'grub-efi-amd64-signed' パッケージを /target/ にインストールするのに失敗しましたが出る場合
+# 対策1(確認済)
+# Ubuntu 18.04 LTSインストール時にGRUBのインストール失敗とその対処
+# http://moebuntu.blog48.fc2.com/blog-entry-1183.html?sp
+# https://qastack.jp/ubuntu/789998/16-04-new-installation-gives-grub-efi-amd64-signed-failed-installation-target
+# GPartedで、以下を最初に作成。Ubuntuインストール時、EFIシステムパーティーションとして見える
+# ・マウントポイント「 /boot/efi 」を設定
+# ・サイズを「200MB」指定
+# ・「FAT32」でフォーマット
+# ・その他「bootフラグ」の指定 ※espが入ってもOK
+
+# 対策2(未確認)
+# Ubuntu 18.04のインストール途中でエラー
+# https://pcl.solima.net/ulife/archives/104
+# 対策としては、ubuntuインストール時のパーティーションで
+# ★FAT32で200MBのパーティションを切る。
+# ★マウントポイント /boot/efi
+# 以下も参考(イメージ)
+# http://moebuntu.blog48.fc2.com/blog-entry-1183.html?sp
