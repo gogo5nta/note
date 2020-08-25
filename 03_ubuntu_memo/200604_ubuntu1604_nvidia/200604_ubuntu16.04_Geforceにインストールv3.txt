@@ -1,0 +1,175 @@
+=============================================
+1. Ubuntu14.04のインストール (最新のGeforce対応)  2020.06.04 更新1
+=============================================
+■前提
+　・BIOSでSecure Boot (UEFI)をOFF
+
+-----------------------------------------------
+■1.インストール時　＆　初回ログイン時（2回実施）
+-----------------------------------------------
+　1.1 メニュー画面で "Install Ubuntu" or "Try Ubuntu without installing"を選択し、"e"を押す
+　1.2 編集画面で "quiet splash" を "nomodeset" に修正
+　1.3 F10で実行 → インストーラが起動
+
+　参考：nVidiaのGPU搭載PCにUbuntuを入れようとしてハマった
+　　　　https://qiita.com/bohemian916/items/8c7f0c4b3d3ea0958559
+
+　　　　コンピューターが起動して黒い画面が表示
+　　　　https://qastack.jp/ubuntu/162075/my-computer-boots-to-a-black-screen-what-options-do-i-have-to-fix-it
+
+-----------------------------------------------
+■2.初回ログイン後
+-----------------------------------------------
+　2.1 GRUBのメニューを編集
+　　$ sudo gedit /etc/default/grub
+　　　GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+　　→GRUB_CMDLINE_LINUX_DEFAULT="nomodeset"
+
+　2.2 grubを更新
+　　$ sudo update-grub
+
+-----------------------------------------------
+■3. CUI(ctrl + Alt + F1)の文字化け対策
+-----------------------------------------------
+　3.1 .bashrcを開く
+　　　$ gedit ~/.bashrc
+
+　3.2 以下を文末に入力
+----------------------------------
+case $TERM in
+      linux) LANG=C ;;
+      *)       LANG=ja_JP.UTF-8;;
+esac
+----------------------------------
+
+　3.3 反映
+　　source ~/.bashrc
+
+　参考：Ubuntu 16.04 のCUIでの文字化け??を直すメモ
+　　　　https://qiita.com/konzo_/items/65c1679645ba42d347fb
+
+-----------------------------------------------
+■4. kernel update
+-----------------------------------------------
+■重要事項　★以下の順番を必ず守ること★
+　① OS install
+　② keernel update
+　③ graphic driver install
+　④ Realsense driver install
+　⑤ ROS install
+
+■ubuntu kernel update (簡易版)
+　https://qiita.com/miyagi1024/items/1ec56c06c79e9a6a5586
+　https://sicklylife.hatenablog.com/entry/2017/05/24/185955
+　　↓
+　$ sudo apt-get install linux-generic-hwe-16.04
+
+■ubuntu kernel update (手動でver指定)
+　https://qiita.com/miyagi1024/items/1ec56c06c79e9a6a5586
+　https://qiita.com/ego/items/36e9baccc80097950195
+　　↓
+　$ sudo apt-get install linux-headers-4.15.0-24-generic linux-image-unsigned-4.15.0-24-generic linux-modules-4.15.0-24-generic -y
+
+■カーネルの確認
+　$ sudo uname -a
+
+■reboot
+　$ sudo rebot
+
+-----------------------------------------------
+■5.nvidia driverインストール (簡易版。まずはこちらから)
+-----------------------------------------------
+　5.1 準備とお約束のGUIの停止．
+　　$ sudo service lightdm stop
+　　$ sudo service gdm stop
+　　$ sudo apt-get install build-essential
+
+　5.2 必要があれば実施(これまでのドライバー削除)
+　　$ sudo apt-get --purge remove nvidia-*
+　　$ sudo apt-get --purge remove cuda-*
+
+　5.3 PPAの追加 ＆ apt-get install nvidia
+　　$ sudo add-apt-repository ppa:graphics-drivers/ppa
+　　　--- proxy環境下は↓ (事前に.bashrcへhttp_proxy や https_proxyを設定済)
+　　　$ sudo -E add-apt-repository ppa:graphics-drivers/ppa
+
+　　$ sudo apt-get update
+　　　↓
+　　sudo apt install nvidia-430
+
+　　※2020.06.04　Geforce RTX2070の場合
+
+　5.4 GUIの再開
+　　$ sudo service lightdm start
+　　$ sudo service gdm start
+
+　　参考  UbuntuにNvidia GPUのDriver + CUDAをInstallする(GTX1080対応版)
+　　　　　https://qiita.com/conta_/items/d639ef0068c9b7a0cd12
+
+-----------------------------------------------
+■5.nvidia driverインストール (公式版。簡易版でNGならこっち)
+-----------------------------------------------
+　5.1 準備とお約束のGUIの停止．
+　　$ sudo service lightdm stop
+　　$ sudo service gdm stop
+　　$ sudo apt-get install build-essential
+
+　5.2 必要があれば実施(これまでのドライバー削除)
+
+　5.3 ダウンロードしたドライバに実行権限を与えて実行
+　　$ cd {ダウンロードしたディレクトリ}
+　　$ sudo chmod +x NVIDIA-Linux-x86_64-440.82.run 
+　　$ sudo ./NVIDIA-Linux-x86_64-440.82.run  --no-opengl-files
+　　　→Xconfig は設定しないようにする
+
+　　※2020.06.04時点ではNVIDIA-Linux-x86_64-440.82.run　(約136MB)
+
+　参考：Ubuntu16.04のRTX2080Tiの対応するNvidia Driverのインストール
+　　　　https://qiita.com/sey323/items/be1d18a0b922d71c5b4e
+
+=============================================
+EFIでブートがおかしくなった場合 (for windows)
+=============================================
+*** BCDEditコマンドで削除 *****************************************
+■BCDEditコマンドを使ってUEFIにあるUbuntuのブート項目を削除します。
+　windows起動 > コマンドプロントを管理者権限で実行
+
+ブート項目にUbuntuがあることを確認します。
+$ bcdedit /enum firmware
+
+ブート項目情報をファイルに書き出します。
+$ bcdedit /enum firmware > bcdedit.txt
+
+書き出したファイルからUbuntuのidをコピーしてブート項目を削除します。
+$ bcdedit /delete {id}
+
+削除されていることを確認します。
+$ bcdedit /enum firmware
+
+参考
+ http://qiita.com/batimiasu/items/0d87413913fbbb90837b
+ https://www.jdbc.tokyo/2016/06/bcdedit-delete-efi-entry/
+
+*** EFIフォルダから削除 ***************************************
+■EFIフォルダからubuntuを削除
+　windows起動 > コマンドプロントを管理者権限で実行
+
+EFIシステムパーティションのディスクを選択
+コマンドプロントを管理者権限で実行
+$ diskpart
+
+$ list disk
+$ select disk 0
+
+$ list partition
+$ selsect partition 2
+
+$ assign letter=D:
+
+$ cd EFI
+$ rmdir /S ubuntu
+
+$ exit
+
+参考
+　http://qiita.com/batimiasu/items/0d87413913fbbb90837b
