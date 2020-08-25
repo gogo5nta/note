@@ -1,0 +1,72 @@
+=============================================================
+1. .bashrcの文末に以下を追加
+=============================================================
+$ gedit ~/.bashrc
+-------------------------------
+export http_proxy="http://proxy.mei.co.jp:8080/"
+export https_proxy="https://proxy.mei.co.jp:8080/"
+-------------------------------
+
+$ source ~/.bashrc
+
+=============================================================
+2. UbuntuでIntel Realsense D415を使えるようにするまで(ROSあり・なし両方)
+=============================================================
+   https://qiita.com/kei_mo/items/c0387b7d277948451881
+
+2.1 手順確認★重要★
+　Intel Realsense SDK インストール
+　ROS インストール
+　realsenseをROSに対応
+
+2.2 Intel Realsense SDK インストール
+ 2.2.1 公開鍵を登録
+
+#一般：
+　sudo apt-key adv --keyserver keys.gnupg.net --recv-key C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
+
+#Proxy内(会社)
+ sudo -E apt-key adv --keyserver keys.gnupg.net --recv-key C8B3A55A6F3EFCDE || sudo -E apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
+
+ 2.2.2 サーバーをレポジトリリストに登録
+  sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial main" -u
+
+
+ 2.2.3 ライブラリをインストール
+  sudo apt-get install librealsense2-dkms    
+  sudo apt-get install librealsense2-utils
+
+ 2.2.4 開発者用ツール、デバッガツールをインストール(オプション)
+  sudo apt-get install librealsense2-dev
+  sudo apt-get install librealsense2-dbg
+
+ 2.2.5 確認(realsenseをつなげ、以下のコマンドによりrealsense viewerを立ち上げ)
+  realsense-viewer
+
+
+=============================================================
+3. ROS Setup
+=============================================================
+https://github.com/IntelRealSense/realsense-ros#installation-instructions
+
+ 3.1 移動
+　cd ~/catkin/src/
+
+ 3.2 ソースコードをダウンロード
+  
+ git clone https://github.com/IntelRealSense/realsense-ros.git
+ cd realsense-ros/
+ git checkout `git tag | sort -V | grep -P "^\d+\.\d+\.\d+" | tail -1`
+ cd .. 
+
+ 3.3 インストール
+
+ catkin_init_workspace  
+ cd ..    
+ catkin_make clean    
+ catkin_make -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release  
+ catkin_make install  
+ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc  
+ source ~/.bashrc  
+
+
