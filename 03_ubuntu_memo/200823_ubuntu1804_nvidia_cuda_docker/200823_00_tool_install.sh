@@ -9,3 +9,5 @@ sudo apt-get install chromium-browser
 # install terminator
 sudo apt-get install terminator
 
+# ssh
+sudo apt-get install openssh-server
