@@ -89,6 +89,9 @@ exit
 # GPU搭載PCの場合、xrdpではハードウェアアクセラレーションが効きません。GPUを利用する場合VNCを利用
 # VirtualGL_TurboVNC
 
+# -------------------------------------------------------------------
+# ★☆★☆　注意：ubuntu 18.04では、TurboVNCを入れるとPC本体からログインできない
+# -------------------------------------------------------------------
 #Get Virtualgl and TurboNVC (2020.08.23)
 #・The .deb package for VirtualGL on sourceforge (latest version: 2.6.4)
 #  URL: https://sourceforge.net/projects/virtualgl/files/
