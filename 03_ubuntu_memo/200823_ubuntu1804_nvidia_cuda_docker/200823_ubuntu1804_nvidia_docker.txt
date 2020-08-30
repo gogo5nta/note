@@ -126,7 +126,7 @@ sudo /opt/VirtualGL/bin/vglserver_config
 $ systemctl start graphical.target
 
 # おまじない（やらなくていい？)
-# $ xauth merge /etc/opt/VirtualGL/vgl_xauth_key
+$ xauth merge /etc/opt/VirtualGL/vgl_xauth_key
 
 # GUIに移動
 # install turboVNC
@@ -139,7 +139,10 @@ sudo dpkg -i turbovnc_*_amd64.deb
 # stop TurboVNC
 /opt/TurboVNC/bin/vncserver -kill :1
 
-# make alias
+# windowsでログインする時
+# ubuntu側の/home/username/.vnc/xxx.logにポート番号を記載(例:5901など)
+
+# make alias (start)
 # turbovncの起動エイリアスを作成. nano ~/.bashrcを実行し
 alias TVNC='/opt/TurboVNC/bin/vncserver -depth 24' 
 
