@@ -25,3 +25,7 @@ sudo apt-get -y install cuda-10-1
 echo "# CUDA setting" >> ~/.bashrc
 echo 'export PATH="/usr/local/cuda/bin:$PATH"' >> ~/.bashrc
 echo 'export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"' >> ~/.bashrc
+
+# 再起動時画面が黒くなるので、sudo apt-get update & upgradeを実施
+sudo apt-get update
+sudo apt-get upgrade
