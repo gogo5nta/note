@@ -1,0 +1,55 @@
+# --------------------------------------------------------
+# Jupyter notebookをインストール(ubuntu18.04にanacondaをインストール)
+# https://qiita.com/yto1292/items/8efcb6175828debf7395
+# https://qiita.com/szk3/items/920fd3e905ed16469780
+# --------------------------------------------------------
+# リンク先を参照し、該当ファイルをDL
+curl -O  https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh
+
+# インストールの実行
+bash Anaconda3-2020.07-Linux-x86_64.sh
+
+# condaのpath追加
+echo "export PATH=~/anaconda3/bin:$PATH"  >> ~/.bashrc
+
+# Jupyter notebookの起動確認
+jupyter notebook
+
+# Anaconda確認
+conda -V
+Python -V
+
+# --------------------------------------------------------
+# windows上でアクセス
+# https://edosha.hatenablog.jp/entry/2020/02/21/101937
+# --------------------------------------------------------
+# (windows)コマンドプロントで以下を入力
+# 例: ssh -L 8890:localhost:8888 rira@z77mx-d3h
+# 01_ssh_login.jpg
+ssh -L 8890:localhost:8888 [user id]@[ip address]
+
+# (windows)ログイン先でjupyter notebookを起動し、
+# tokun=以降をコピー
+# 02_ssh上でjupyternotebook起動.jpg
+jupyter notebook
+
+# (windows)ブラウザを起動し、localhost:8890へアクセス
+# tokunの中に、コマンドプロントでsshし、jupyter notebook起動時のtokun=以降をコピー
+# 03_クライアント(windows10)のブラウザでログイン(localhost_8890).jpg
+
+# (windows)ブラウザ上でjupyter notebookを利用
+# Pythonの為のJupyter Notebookの基本的な使い方 
+#   https://note.com/mc_kurita/n/n4261e54d2539
+# (DLの課題実習)Google Colab (Jupyter Notebook) リンク
+#   https://qiita.com/hf149/private/879f1ad4163ed19fdb09
+# 04_クライアント(windows10)のブラウザでjupyternotebook.jpg
+
+
+# --------------------------------------------------------
+# Pythonの為のJupyter Notebookの基本的な使い方
+# https://note.com/mc_kurita/n/n4261e54d2539
+#
+# Google Colabの使い方まとめ
+# https://qiita.com/shoji9x9/items/0ff0f6f603df18d631ab
+# --------------------------------------------------------
+
