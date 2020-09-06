@@ -32,9 +32,9 @@
 #Acquire::ftp::proxy "ftp://プロキシサーバー名:ポート番号/";
 
 ## general
-sudo apt-get -yupdate
-sudo apt-get -yupgrade
-sudo apt-get -yautoremove
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y autoremove
 
 ## Setup your sources.list
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -51,7 +51,7 @@ sudo apt-get -y update
 # sudo rm /var/lib/apt/lists/lock
 
 ## Install necessary dependencies
-sudo apt-get -y install  python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential  cmake
+sudo apt-get -y install  python-rosdep python-rosinstall-generator python-wstool python-rosinstall python-roslaunch build-essential  cmake
 
 ## Install ros-Melodic-desktop-full
 sudo apt-get -y install  ros-melodic-desktop-full
@@ -61,7 +61,6 @@ sudo rosdep init
 rosdep update
 
 ## Setting up the ROS environment variables
-echo “source /opt/ros/melodic/setup.bash” >> ~/.bashrc
 source /opt/ros/melodic/setup.bash
 
 ## Create and initialize the catkin workspace
@@ -72,7 +71,8 @@ cd ~/catkin_workspace/
 catkin_make
 
 ## Add the catkin_workspace to your ROS environment
-echo “source ~/catkin_workspace/devel/setup.bash” >> ~/.bashrc
+echo "## Add the catkin_workspace to your ROS environment" >> ~/.bashrc
+echo "source ~/catkin_workspace/devel/setup.bash" >> ~/.bashrc
 
 ## Step 11: Check the ROS environment variables
 export | grep ROS
