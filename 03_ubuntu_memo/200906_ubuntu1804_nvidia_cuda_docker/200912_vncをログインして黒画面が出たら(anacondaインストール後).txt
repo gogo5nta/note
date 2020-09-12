@@ -1,0 +1,9 @@
+VNC black screen (CentOS)
+この場合は Anaconda が悪さをしているようだが、Anaconda を使っていない場合でも同様な問題が起こることがある。
+http://penguinitis.g1.xrea.com/computer/linux/VNC.html
+　↓
+https://forums.centos.org/viewtopic.php?t=66886
+Add a comment before #export PATH="/root/anaconda3/bin:$PATH" then solve the black screen problem.
+　↓
+Anacondaをインストール後、.bashrcの以下がコメントしているかチェック
+#export PATH="/root/anaconda3/bin:$PATH"
