@@ -11,3 +11,6 @@ sudo apt-get install terminator
 
 # ssh
 sudo apt-get install openssh-server
+
+# good tool gnome-tweaks
+sudo apt-get install gnome-tweaks
