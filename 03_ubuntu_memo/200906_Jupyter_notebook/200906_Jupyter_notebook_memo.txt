@@ -10,6 +10,7 @@ curl -O  https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh
 bash Anaconda3-2020.07-Linux-x86_64.sh
 
 # condaのpath追加
+# 以下を追加するとTurboVNC(VNC系)でログイン後画面が黒に。注意
 echo "export PATH=~/anaconda3/bin:$PATH"  >> ~/.bashrc
 
 # Jupyter notebookの起動確認
