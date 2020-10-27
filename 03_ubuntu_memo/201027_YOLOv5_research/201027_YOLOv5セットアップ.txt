@@ -109,7 +109,7 @@ cd yolov5
 # Train yolov5l on custom dataset for 300 epochs
 python train.py --img 1280 --batch 16 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0
 
-# 以下のエラーが出る場合、--batch 8 などでバッチサイズを小さくする
+# 以下のエラーが出る場合、--batch 8 などでバッチサイズを小さくする (Geforce 1080など)
 # RuntimeError: CUDA out of memory. Tried to allocate 200.00 MiB (GPU 0; 7.93 GiB total capacity; 6.85 GiB already allocated; 57.75 MiB free; 6.94 GiB reserved in total by PyTorch)
 # 参考: https://github.com/ultralytics/yolov5/issues/1040
-python train.py --img 1280 --batch 16 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0 --batch 2
+python train.py --img 1280 --batch 16 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0 --batch 1
