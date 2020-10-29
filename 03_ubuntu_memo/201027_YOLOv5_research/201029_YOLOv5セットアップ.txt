@@ -1,0 +1,194 @@
+201028_YOLOv5セットアップ.txt
+-------------------------------------------------------------------------
+# ---------------------------------------------
+# 事前にPython3.8とtorch>=1.6以上をインストール
+# ---------------------------------------------
+# 詳しくは、以下を参照。anaconda3インストール時、jupyter-notebookもインストールされる
+# 200912_ubuntu1804_Anaconda(jupyternotebook)_cuDNN_pytorchl.txt
+
+
+# --------------------------
+# Anaconda3の環境をaliasから呼び出す
+# --------------------------
+# .bashrc内に以下を記述
+# alias conda_start='export PATH=~/anaconda3/bin:$PATH'
+
+# ターミナルを開きalias呼び出し(condaスタート)
+conda_start
+
+
+# --------------------------------
+# YOLO v5ソースコード入手&環境構築
+# --------------------------------
+# 参考: https://lionbridge.ai/ja/articles/yolov5-object-detection/
+# ソース入手
+git clone https://github.com/ultralytics/yolov5
+
+# 環境構築(事前にaliasでanaconda3の環境に移行)
+cd yolov5
+pip install -U -r requirements.txt
+
+
+# -----------------------------------------------------
+# Trainingフォルダを作成し、datasetフォルダを内部に生成
+# -----------------------------------------------------
+!mkdir training
+cd training
+!mkdir dataset
+
+# --------------------------------
+# ARCdatasetからrgb_jpgを作成し、datasetを作成
+# --------------------------------
+# http://mprg.jp/research/arc_dataset_2017_j
+# 上記から「ARCdataset_png.zip」を入手。
+# 解凍後、①内のpng画像を、②内にjpg変換し格納
+# windowsのirfanviewを使うと、フォルダ単位で画像形式変換可能
+# irfanview : https://forest.watch.impress.co.jp/library/software/irfanview/
+# 
+# ① ARCdataset_png/train/rgb      #  元画像(png)
+# ② ARCdataset_png/train/rgb_jpg  #変換画像(jpg)
+# 
+# ③ ARCdataset_png/train/boundingbox
+# アノテーションフォルダ③と②の中身をdatasetフォルダ内に入れる
+# yolov5/training/dataset
+#  ├2017-002-1.jpg
+#  ├2017-002-1.txt
+#  ├2017-002-2.jpg
+#  ├2017-002-2.txt
+#  ・
+
+# --------------------------------
+# ARCdatasetからtrainとvalidを生成
+# --------------------------------
+# yolov5のフォルダ上で、以下のコマンドを入力し、jupyter-notebook起動
+cd yolov5/training
+jupyter-notebook
+
+# https://lionbridge.ai/ja/articles/yolov5-object-detection/
+# 独自のデータセットフォルダをこのフォルダにコピーし、シンプルなtrain_val_folder_split.ipynb
+# の下のコースを、train_val_folder_split.ipynbとして実行(.pyとして出力してもOK）
+# 参考: Screenshot_train_val_folder_split.jpg
+
+
+# -------------------------------------------------
+# trainingフォルダにdataset.yamlとmodel.yamlをセット
+# -------------------------------------------------
+# yolov5/trainingに以下の二つを追加
+#
+# dataset.yaml
+# -------------------------------------------
+# # train and val datasets (image directory or *.txt file with image paths)
+# train: training/data/images/train/
+# val: training/data/images/valid/
+# 
+# # number of classes
+# nc: 41
+# 
+# # class names
+# names: ['BG', 'Item1', 'Item2',・・,'Item40']
+# -------------------------------------------
+
+# model.yaml
+# yolov5/models/yolov5l.yamlのファイルをトレーニングフォルダにコピーし
+# nc(クラス数)を41に変更
+# -------------------------------------------
+# # parameters
+# nc: 41 # change number of classes
+# depth_multiple: 1.0 # model depth multiple
+# width_multiple: 1.0 # layer channel multiple
+# 　・
+# 　・
+# -------------------------------------------
+
+
+# -------------------------------------------------
+# training開始
+# -------------------------------------------------
+cd yolov5
+
+# Train yolov5l on custom dataset for 300 epochs
+python train.py --img 960 --batch 16 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0
+
+# 以下のエラーが出る場合、
+# RuntimeError: CUDA out of memory. Tried to allocate 200.00 MiB (GPU 0; 7.93 GiB total capacity; 6.85 GiB already allocated; 57.75 MiB free; 6.94 GiB reserved in total by PyTorch)
+# Step1 --img 480 などimg-size(学習時、推論時のサイズ。モザイクローダーの基本)を小さくする(ARCdatasetは1280x960なので--img 960がMax)、
+# Step2 --batch 8 などでバッチサイズを小さくする
+#  モデルの大きさを変える (yolov5l.yaml → yolov5m.yaml)
+#
+# 参考: https://github.com/ultralytics/yolov5/issues/1040
+python train.py --img 480 --batch 15 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0
+
+
+# -------------------------------------------------
+# 途中結果の確認(tensorboard活用)
+# -------------------------------------------------
+# 別ターミナルを起動し、yolov5のフォルダ上でalias呼び出し(condaスタート)
+conda_start
+
+# tensorboard起動
+# 終了はCTRL+C
+# 下記コマンド後、URLで確認可能→　http://localhost:6006/
+tensorboard --logdir=runs
+
+# -------------------------------------------------
+# 途中結果の確認(runs/expX/results.txt)
+# -------------------------------------------------
+     EPOCH     gpu_mem     box       obj       cls     total   targets  img_size         P         R     mAP@.5  mAP@.5-.95 val_loss(box, obj, cls)
+                                                                                 precision    recall    mAP_0.5  mAP_0.5:0/95  box    object    class
+                                                                                    適合率    再現率   複数class平均適合率    loss     loss     loss
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+     0/299     3.81G   0.06137   0.02314   0.05899    0.1435         7      1280         0         0 0.0009165 0.0001907   0.04028    0.0164    0.0456
+     1/299     7.38G   0.05249   0.02003   0.05658    0.1291         9      1280         0         0  0.001736 0.0004825   0.03712   0.01393   0.04256
+      ・
+   200/299     7.38G   0.01642   0.01123   0.01327   0.04092         1      1280     0.621    0.7872     0.765     0.497   0.01296  0.009445  0.009567
+
+# -------------------------------------------------
+# 推論(推論時もGPUが必要なので、学習終了後に実施)
+# -------------------------------------------------
+# 参考: https://lionbridge.ai/ja/articles/yolov5-object-detection/
+# 参考: https://note.com/npaka/n/n371912b48ee2
+# 参考: https://software-data-mining.com/%E7%89%A9%E4%BD%93%E6%A4%9C%E7%9F%A5%E6%8A%80%E6%B3%95yolov5%E3%81%AB%E3%82%88%E3%82%8B%E7%94%BB%E5%83%8F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E7%89%A9%E4%BD%93%E6%A4%9C%E7%9F%A5/
+
+# yolov5/inference/images に推論用の画像群を入れる
+#  2017-001-1.png
+#  2017-001-2.png
+# 推論用のテスト画像は、以下からコピー
+# ARCdataset\test_known\rgb
+
+# yolov5/weightsに、yolov5/runs/expX/weights/best.ptをコピー
+
+# yolov5のフォルダで以下を実行(deviceはdefault)
+python detect.py --weights weights/best.pt --source inference/images/ --save-dir inference/output --img-size 960 --view-img --save-txt
+
+# yolov5のフォルダで以下を実行(deviceはcpu)
+# python detect.py --weights weights/best.pt --source inference/images/ --save-dir inference/output --img-size 960- --view-img --save-txt --device cpu
+
+
+usage: detect.py [-h] [--weights WEIGHTS [WEIGHTS ...]] [--source SOURCE] [--img-size IMG_SIZE]
+                 [--conf-thres CONF_THRES] [--iou-thres IOU_THRES] [--device DEVICE]
+                 [--view-img] [--save-txt] [--save-conf] [--save-dir SAVE_DIR]
+                 [--classes CLASSES [CLASSES ...]] [--agnostic-nms] [--augment] [--update]
+
+
+
+# -------------------------------------------------
+# 評価(評価はCPUのみ利用)
+# -------------------------------------------------
+# 以下のサイトからソースを入手
+git clone https://github.com/machine-perception-robotics-group/MC2ARCdataset_evaluate
+
+# detect_evaluateに移動
+cd MC2ARCdataset_evaluate/detect_evaluation
+
+# image　フォルダ(画像データ)に　ARCdataset_png\test_known\rgb　　　　　のpngをコピー //確認画像
+# teach　フォルダ(教師データ)に　ARCdataset_png\test_known\boundingbox　のtxtをコピー //正解データ
+# resultsフォルダ(結果データ)に　yolov5\inference\output　　　　　　　　のtxtをコピー //推論結果
+
+# プログラム(detect_evaluation.py)の設定
+# LABEL_FLAG = 0                          //label名なし
+# detect_evaluation.py内のNORMALIZED = 1  //result are normalized
+
+#実行
+python detect_evaluation.py 
+
+#評価をやり直す場合は「(result_path)/matchingResults/」と「(result_path)/eval/」をディレクトリごと削除
