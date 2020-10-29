@@ -107,15 +107,17 @@ jupyter-notebook
 cd yolov5
 
 # Train yolov5l on custom dataset for 300 epochs
-python train.py --img 1280 --batch 16 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0
+python train.py --img 960 --batch 16 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0
 
-# 以下のエラーが出る場合、--batch 1 などでバッチサイズを小さくする 
+# 以下のエラーが出る場合、
 # RuntimeError: CUDA out of memory. Tried to allocate 200.00 MiB (GPU 0; 7.93 GiB total capacity; 6.85 GiB already allocated; 57.75 MiB free; 6.94 GiB reserved in total by PyTorch)
+# Step1 --img 480 などimg-size(学習時、推論時のサイズ。モザイクローダーの基本)を小さくする(ARCdatasetは1280x960なので--img 960がMax)、
+# Step2 --batch 8 などでバッチサイズを小さくする
+#  モデルの大きさを変える (yolov5l.yaml → yolov5m.yaml)
+#
 # 参考: https://github.com/ultralytics/yolov5/issues/1040
-python train.py --img 1280 --batch 1 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0
+python train.py --img 480 --batch 15 --epochs 300 --data training/dataset.yaml --cfg training/yolov5l.yaml --weights '' --device 0
 
-# まだエラーが出る場合、モデルを軽くする (Geforce 1080など。batch1、yolov5m.yaml)
-python train.py --img 1280 --batch 1 --epochs 300 --data training/dataset.yaml --cfg training/yolov5m.yaml --weights '' --device 0
 
 # -------------------------------------------------
 # 途中結果の確認(tensorboard活用)
@@ -139,3 +141,32 @@ tensorboard --logdir=runs
      1/299     7.38G   0.05249   0.02003   0.05658    0.1291         9      1280         0         0  0.001736 0.0004825   0.03712   0.01393   0.04256
       ・
    200/299     7.38G   0.01642   0.01123   0.01327   0.04092         1      1280     0.621    0.7872     0.765     0.497   0.01296  0.009445  0.009567
+
+# -------------------------------------------------
+# 推論(推論時もGPUが必要なので、学習終了後に実施)
+# -------------------------------------------------
+# 参考: https://lionbridge.ai/ja/articles/yolov5-object-detection/
+# 参考: https://note.com/npaka/n/n371912b48ee2
+# 参考: https://software-data-mining.com/%E7%89%A9%E4%BD%93%E6%A4%9C%E7%9F%A5%E6%8A%80%E6%B3%95yolov5%E3%81%AB%E3%82%88%E3%82%8B%E7%94%BB%E5%83%8F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E7%89%A9%E4%BD%93%E6%A4%9C%E7%9F%A5/
+
+# yolov5/inference/images に推論用の画像群を入れる
+#  2017-001-1.png
+#  2017-001-2.png
+# 推論用のテスト画像は、以下からコピー
+# ARCdataset\test_known\rgb
+
+# yolov5/weightsに、yolov5/runs/expX/weights/best.ptをコピー
+
+# yolov5のフォルダで以下を実行(deviceはdefault)
+python detect.py --weights weights/best.pt --source inference/images/ --save-dir inference/output --img-size 960 --view-img --save-txt
+
+# yolov5のフォルダで以下を実行(deviceはcpu)
+# python detect.py --weights weights/best.pt --source inference/images/ --save-dir inference/output --img-size 960- --view-img --save-txt --device cpu
+
+
+usage: detect.py [-h] [--weights WEIGHTS [WEIGHTS ...]] [--source SOURCE] [--img-size IMG_SIZE]
+                 [--conf-thres CONF_THRES] [--iou-thres IOU_THRES] [--device DEVICE]
+                 [--view-img] [--save-txt] [--save-conf] [--save-dir SAVE_DIR]
+                 [--classes CLASSES [CLASSES ...]] [--agnostic-nms] [--augment] [--update]
+
+
