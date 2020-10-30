@@ -1,0 +1,13 @@
+python train.py --img 1280 --batch 1 --epochs 300 --data training/dataset.yaml --cfg training/yolov5m.yaml --weights '' --device 0
+
+   299/299     7.38G   0.01347  0.009261  0.008787   0.03152         3      1280    0.6595    0.7973    0.7883    0.5371   0.01205  0.009924  0.009018
+ ↓
+
+Epoch   gpu_mem       box       obj       cls     total   targets  img_size
+   299/299     7.38G   0.01347  0.009261  0.008787   0.03152         3       1280: 100%
+               Class      Images     Targets           P           R      mAP@.5  mAP@.5:.95: 100%
+                 all         252    1.21e+03       0.6595       0.7973    0.7883    0.5371
+
+Optimizer stripped from runs/exp1/weights/last.pt, 43.8MB
+Optimizer stripped from runs/exp1/weights/best.pt, 43.8MB
+300 epochs completed in 30.027 hours.

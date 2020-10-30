@@ -1,0 +1,6 @@
+--- train ---
+python train.py --img 1280 --batch 1 --epochs 300 --data training/dataset.yaml --cfg training/yolov5m.yaml --weights '' --device 0
+
+--- detect ---
+python detect.py --weights weights/best.pt --source inference/images/ --save-dir inference/output --img-size 1280 --view-img --save-txt
+
