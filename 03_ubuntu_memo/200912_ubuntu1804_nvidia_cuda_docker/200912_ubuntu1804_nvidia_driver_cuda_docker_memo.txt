@@ -1,9 +1,9 @@
 
 # --------------------------------------------------------
-# Ubuntu18.04‚ÉNVIDIA Container Toolkit‚ğƒCƒ“ƒXƒg[ƒ‹‚·‚é
+# Ubuntu18.04ã«NVIDIA Container Toolkitã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹
 # https://qiita.com/Wisteria30/items/6f1e35e600e93ff2c54b
 # --------------------------------------------------------
-# HP’Ê‚è‚â‚éB‚½‚¾‚µšcuda-10-2‚Æw’èš(cnDnn‚âcublus‚È‚Ç‚ğg‚¤‚½‚ßA10.1‚Å‚È‚­10.2)
+# HPé€šã‚Šã‚„ã‚‹ã€‚ãŸã ã—â˜…cuda-10-2ã¨æŒ‡å®šâ˜…(cnDnnã‚„cublusãªã©ã‚’ä½¿ã†ãŸã‚ã€10.1ã§ãªã10.2)
 # URL: https://qiita.com/Wisteria30/items/6f1e35e600e93ff2c54b
 # URL: https://medium.com/@exesse/cuda-10-1-installation-on-ubuntu-18-04-lts-d04f89287130
 # URL: https://qiita.com/Navier/items/ec0562e42d8c6e2f504a
@@ -13,29 +13,29 @@ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 sudo apt-get update
-# ©“®‚Å‡‚¤driver‚ğ“ü‚ê‚Ä‚­‚ê‚é
-# sudo ubuntu-drivers autoinstall‚¾‚Æ435, ˆÈ‰ºƒRƒ}ƒ“ƒh‚¾‚Æ418‚ÌƒCƒ“ƒXƒg[ƒ‹‚ğŠm”F
+# è‡ªå‹•ã§åˆã†driverã‚’å…¥ã‚Œã¦ãã‚Œã‚‹
+# sudo ubuntu-drivers autoinstallã ã¨435, ä»¥ä¸‹ã‚³ãƒãƒ³ãƒ‰ã ã¨418ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã‚’ç¢ºèª
 sudo apt-get -y install cuda-drivers
-sudo apt-get -y --no-install-recommends cuda-10-2
+sudo apt-get -y --no-install-recommends install cuda-10-2
 
-# ˆÈ‰º‚ğ.bashrc‚É’Ç‰Á
+# ä»¥ä¸‹ã‚’.bashrcã«è¿½åŠ 
 export PATH="/usr/local/cuda/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
-# Ä‹N“®‰æ–Ê‚ª•‚­‚È‚é‚Ì‚ÅAsudo apt-get update & upgrade‚ğÀ{
+# å†èµ·å‹•æ™‚ç”»é¢ãŒé»’ããªã‚‹ã®ã§ã€sudo apt-get update & upgradeã‚’å®Ÿæ–½
 sudo apt-get update
 sudo apt-get upgrade
 
-# Ä‹N“®
+# å†èµ·å‹•
 $ sudo reboot
 
-# Šm”F(nvidia driver)
+# ç¢ºèª(nvidia driver)
 $ nvidia-smi
 
-# Šm”F(nvidia cuda)
+# ç¢ºèª(nvidia cuda)
 $ nvcc -V
 
-# Docker‚ğƒCƒ“ƒXƒg[ƒ‹
+# Dockerã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -44,18 +44,18 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 
-# Šm”F(Docker)
+# ç¢ºèª(Docker)
 sudo docker run hello-world
 
-# Šm”F(Docker version)
+# ç¢ºèª(Docker version)
 $ docker -v
 Docker version 19.03.4, build 9013bf583a
 
 # --------------------------------------------------------
-# NVIDIA container toolkit‚ğg‚Á‚ÄAdocker‚ÌƒRƒ“ƒeƒiã‚Åcuda‚ğ“®‚©‚·
+# NVIDIA container toolkitã‚’ä½¿ã£ã¦ã€dockerã®ã‚³ãƒ³ãƒ†ãƒŠä¸Šã§cudaã‚’å‹•ã‹ã™
 # URL:https://qiita.com/Hiroaki-K4/items/c1be8adba18b9f0b4cef
 # --------------------------------------------------------
-# ŠÂ‹«
+# ç’°å¢ƒ
 # Ubuntu 18.04
 # docker 19.03
 # nvidia driver 450.36
@@ -68,27 +68,27 @@ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
 
-# Šm”F(docker --gpus)
+# ç¢ºèª(docker --gpus)
 sudo docker run --gpus all nvidia/cuda:10.1-base-ubuntu18.04 nvidia-smi
 
-# DockerƒRƒ}ƒ“ƒh‚ğsudo‚È‚µ‚ÅÀs‚·‚é•û–@
+# Dockerã‚³ãƒãƒ³ãƒ‰ã‚’sudoãªã—ã§å®Ÿè¡Œã™ã‚‹æ–¹æ³•
 # URL:https://qiita.com/DQNEO/items/da5df074c48b012152ee
-# dockerƒOƒ‹[ƒv‚ª‚È‚¯‚ê‚Îì‚é
+# dockerã‚°ãƒ«ãƒ¼ãƒ—ãŒãªã‘ã‚Œã°ä½œã‚‹
 sudo groupadd docker
 
-# Œ»sƒ†[ƒU‚ğdockerƒOƒ‹[ƒv‚ÉŠ‘®‚³‚¹‚é
+# ç¾è¡Œãƒ¦ãƒ¼ã‚¶ã‚’dockerã‚°ãƒ«ãƒ¼ãƒ—ã«æ‰€å±ã•ã›ã‚‹
 sudo gpasswd -a $USER docker
 
-# dockerƒf[ƒ‚ƒ“‚ğÄ‹N“®‚·‚é (CentOS7‚Ìê‡)
+# dockerãƒ‡ãƒ¼ãƒ¢ãƒ³ã‚’å†èµ·å‹•ã™ã‚‹ (CentOS7ã®å ´åˆ)
 sudo systemctl restart docker
 
-# exit‚µ‚ÄÄƒƒOƒCƒ“‚·‚é‚Æ”½‰f‚³‚ê‚éB
+# exitã—ã¦å†ãƒ­ã‚°ã‚¤ãƒ³ã™ã‚‹ã¨åæ˜ ã•ã‚Œã‚‹ã€‚
 exit
 
 
 # --------------------------------------------------------------------------------
-# y’ˆÓznvidia driver‚ğ“ü‚ê‚½‚çAvirtualgl‚âturboVNC‚ğ“ü‚ê‚é‘O‚É•K‚¸nouveau‚ğ’â~
-# Ql:https://qiita.com/ohta6/items/684b9ecd4d67a52e5a7f
+# ã€æ³¨æ„ã€‘nvidia driverã‚’å…¥ã‚ŒãŸã‚‰ã€virtualglã‚„turboVNCã‚’å…¥ã‚Œã‚‹å‰ã«å¿…ãšnouveauã‚’åœæ­¢
+# å‚è€ƒ:https://qiita.com/ohta6/items/684b9ecd4d67a52e5a7f
 # --------------------------------------------------------------------------------
 sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
 sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
@@ -96,17 +96,17 @@ sudo update-initramfs -u
 
 sudo reboot
 
-# Šm”F (‰½‚ào‚È‚¯‚ê‚ÎOKBnouveau‚ª’â~‚µ‚Ä‚¢‚é)
+# ç¢ºèª (ä½•ã‚‚å‡ºãªã‘ã‚Œã°OKã€‚nouveauãŒåœæ­¢ã—ã¦ã„ã‚‹)
 # lsmod | grep -i nouveau
 
 
 # --------------------------------------------------------
-# other1Fubuntu18.04 RDP(Windows 10)
+# other1ï¼šubuntu18.04 RDP(Windows 10)
 # URL1: https://qiita.com/exthnet/items/dcb0bd94f09a2b4c9835
 # URL2: https://qiita.com/Shunmo17/items/c2e21af5d5f609c01b08
 # URL3: https://geraniums.hatenablog.com/entry/2018/05/25/151153
 # --------------------------------------------------------
-# GPU“‹ÚPC‚Ìê‡Axrdp‚Å‚Íƒn[ƒhƒEƒFƒAƒAƒNƒZƒ‰ƒŒ[ƒVƒ‡ƒ“‚ªŒø‚«‚Ü‚¹‚ñBGPU‚ğ—˜—p‚·‚éê‡VNC‚ğ—˜—p
+# GPUæ­è¼‰PCã®å ´åˆã€xrdpã§ã¯ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ãŒåŠ¹ãã¾ã›ã‚“ã€‚GPUã‚’åˆ©ç”¨ã™ã‚‹å ´åˆVNCã‚’åˆ©ç”¨
 # VirtualGL_TurboVNC
 
 #*** Get Virtualgl and TurboNVC (2020.08.23) ***
@@ -125,19 +125,19 @@ sudo dpkg -i virtualgl_*_amd64.deb
  
 # stop desktop
 # --- ubuntu 16.04 ---
-# Ctl + Alt + F1‚ÅCUI‚ÉˆÚ“®B–‘O‚É•¶š‰»‚¯‘Îô•K—v
+# Ctl + Alt + F1ã§CUIã«ç§»å‹•ã€‚äº‹å‰ã«æ–‡å­—åŒ–ã‘å¯¾ç­–å¿…è¦
 # sudo systemctl stop lightdm
 
 # --- ubuntu 18.04 ---
-# Ctl + Alt + F3‚ÅCUI‚ÉˆÚ“®B–‘O‚É•¶š‰»‚¯‘Îô•K—v
+# Ctl + Alt + F3ã§CUIã«ç§»å‹•ã€‚äº‹å‰ã«æ–‡å­—åŒ–ã‘å¯¾ç­–å¿…è¦
 sudo systemctl isolate multi-user.target
  
 # setup virtualgl
-# “r’†‚Ì¿–â‚Í‰E‚ğQl https://virtualgl.org/vgldoc/2_2_1/#hd005001
+# é€”ä¸­ã®è³ªå•ã¯å³ã‚’å‚è€ƒ https://virtualgl.org/vgldoc/2_2_1/#hd005001
 # 1, n, n, n, x 
 sudo /opt/VirtualGL/bin/vglserver_config
 
-# ¸”s‚·‚é‚ªˆê‰À{
+# å¤±æ•—ã™ã‚‹ãŒä¸€å¿œå®Ÿæ–½
 #sudo rmmod nvidia
 #sudo rmmod nvidia_modeset
 #sudo rmmod nvidia_modeset_drm
@@ -149,60 +149,60 @@ sudo /opt/VirtualGL/bin/vglserver_config
 # --- ubuntu 18.04 ---
  sudo systemctl start graphical.target
 
-# ‚¨‚Ü‚¶‚È‚¢i‚â‚ç‚È‚­‚Ä‚¢‚¢H)
+# ãŠã¾ã˜ãªã„ï¼ˆã‚„ã‚‰ãªãã¦ã„ã„ï¼Ÿ)
 xauth merge /etc/opt/VirtualGL/vgl_xauth_key
 
-# GUI‚ÉˆÚ“®
+# GUIã«ç§»å‹•
 # install turboVNC
 sudo dpkg -i turbovnc_*_amd64.deb
  
 # start TurboVNC
-# ‰‰ñ‚ÍƒpƒXƒ[ƒh“o˜^BƒpƒXƒ[ƒh•¶š—ñ’·‚ª8‚É§ŒÀ‚³‚ê‚Ä‚¢‚é‚Ì‚É’ˆÓ
+# åˆå›ã¯ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ç™»éŒ²ã€‚ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰æ–‡å­—åˆ—é•·ãŒ8ã«åˆ¶é™ã•ã‚Œã¦ã„ã‚‹ã®ã«æ³¨æ„
 /opt/TurboVNC/bin/vncserver -depth 24
 
-# ‹N“®’†‚ÌVNC‚ğŠm”F
-# Ql:https://qiita.com/Sawahashi/items/156be0baaf6384884f3d
+# èµ·å‹•ä¸­ã®VNCã‚’ç¢ºèª
+# å‚è€ƒ:https://qiita.com/Sawahashi/items/156be0baaf6384884f3d
 /opt/TurboVNC/bin/vncserver -list
 
 # stop TurboVNC
 /opt/TurboVNC/bin/vncserver -kill :1
 
-# windows‚ÅƒƒOƒCƒ“‚·‚é
-# ubuntu‘¤‚Ì/home/username/.vnc/xxx.log‚Éƒ|[ƒg”Ô†‚ğ‹LÚ(—á:5901‚È‚Ç)
+# windowsã§ãƒ­ã‚°ã‚¤ãƒ³ã™ã‚‹æ™‚
+# ubuntuå´ã®/home/username/.vnc/xxx.logã«ãƒãƒ¼ãƒˆç•ªå·ã‚’è¨˜è¼‰(ä¾‹:5901ãªã©)
 
-# š’ˆÓš vnc‚ğƒƒOƒCƒ“‚µ‚Ä•‰æ–Ê‚ªo‚½‚ç(anacondaƒCƒ“ƒXƒg[ƒ‹Œã)
-# ‚±‚Ìê‡‚Í Anaconda ‚ªˆ«‚³‚ğ‚µ‚Ä‚¢‚é‚æ‚¤‚¾‚ªAAnaconda ‚ğg‚Á‚Ä‚¢‚È‚¢ê‡‚Å‚à“¯—l‚È–â‘è‚ª‹N‚±‚é‚±‚Æ‚ª‚ ‚éB
+# â˜…æ³¨æ„â˜… vncã‚’ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦é»’ç”»é¢ãŒå‡ºãŸã‚‰(anacondaã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«å¾Œ)
+# ã“ã®å ´åˆã¯ Anaconda ãŒæ‚ªã•ã‚’ã—ã¦ã„ã‚‹ã‚ˆã†ã ãŒã€Anaconda ã‚’ä½¿ã£ã¦ã„ãªã„å ´åˆã§ã‚‚åŒæ§˜ãªå•é¡ŒãŒèµ·ã“ã‚‹ã“ã¨ãŒã‚ã‚‹ã€‚
 # http://penguinitis.g1.xrea.com/computer/linux/VNC.html
-#@«
-#Anaconda‚ğƒCƒ“ƒXƒg[ƒ‹ŒãA.bashrc‚ÌˆÈ‰º‚ªƒRƒƒ“ƒg‚µ‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+#ã€€â†“
+#Anacondaã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«å¾Œã€.bashrcã®ä»¥ä¸‹ãŒã‚³ãƒ¡ãƒ³ãƒˆã—ã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 ##export PATH="/root/anaconda3/bin:$PATH"
 
-# --- ‚±‚±‚©‚ç‚Í•K—v‚È‚çÀ{ ---
+# --- ã“ã“ã‹ã‚‰ã¯å¿…è¦ãªã‚‰å®Ÿæ–½ ---
 # make alias
-# turbovnc‚Ì‹N“®ƒGƒCƒŠƒAƒX‚ğì¬. nano ~/.bashrc‚ğÀs‚µ
+# turbovncã®èµ·å‹•ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã‚’ä½œæˆ. nano ~/.bashrcã‚’å®Ÿè¡Œã—
 alias TVNC='/opt/TurboVNC/bin/vncserver -depth 24' 
 
-# (‚»‚Ì‘¼)©“®‹N“®
-# ©“®‹N“®‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğ‘I‘ğBƒ{ƒbƒNƒX‚Ì‰E‘¤‚É‚ ‚éAdd‚ğƒNƒŠƒbƒN
-#     –¼‘O: start turbovnc
-# ƒRƒ}ƒ“ƒh: /opt/TurboVNC/bin/vncserver -depth 24
-#     à–¾: TurboVNC‚Ì‹N“®
-# --- ‚±‚±‚Ü‚Å -------------------
+# (ãã®ä»–)è‡ªå‹•èµ·å‹•
+# è‡ªå‹•èµ·å‹•ã™ã‚‹ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é¸æŠã€‚ãƒœãƒƒã‚¯ã‚¹ã®å³å´ã«ã‚ã‚‹Addã‚’ã‚¯ãƒªãƒƒã‚¯
+#     åå‰: start turbovnc
+# ã‚³ãƒãƒ³ãƒ‰: /opt/TurboVNC/bin/vncserver -depth 24
+#     èª¬æ˜: TurboVNCã®èµ·å‹•
+# --- ã“ã“ã¾ã§ -------------------
 
 # --------------------------------------------------------
-# Ql1F•K—v‚È‚çÀ{
+# å‚è€ƒ1ï¼šå¿…è¦ãªã‚‰å®Ÿæ–½
 # --------------------------------------------------------
-# “ú–{ŒêƒtƒHƒ‹ƒ_€”õ
+# æ—¥æœ¬èªãƒ•ã‚©ãƒ«ãƒ€æº–å‚™
 $ LANG=C xdg-user-dirs-gtk-update
 
-# (Ql)‹Œver‚Ìdriver‚ğíœ(•K—v‚È‚ç‚Î)
+# (å‚è€ƒ)æ—§verã®driverã‚’å‰Šé™¤(å¿…è¦ãªã‚‰ã°)
 sudo rm /etc/apt/sources.list.d/cuda*
 sudo apt-get --purge remove nvidia-*
 sudo apt-get --purge remove cuda-*
 
-# (Ql)CUI‚Å•¶š‰»‚¯C³
-# •¶––‚Ü‚ÅˆÚ“®‚µ‚ÄCˆÈ‰º‚Ì•¶‚ğ“ü—Í
-# I—¹‚Íctrl+x‚Å•Û‘¶
+# (å‚è€ƒ)CUIã§æ–‡å­—åŒ–ã‘ä¿®æ­£
+# æ–‡æœ«ã¾ã§ç§»å‹•ã—ã¦ï¼Œä»¥ä¸‹ã®æ–‡ã‚’å…¥åŠ›
+# çµ‚äº†ã¯ctrl+xã§ä¿å­˜
 $ nano ~/.bashrc
 ---------
 case $TERM in
@@ -211,45 +211,45 @@ case $TERM in
 esac
 ----------
 
-# (Ql)Nouveauƒhƒ‰ƒCƒo[‚ÌŠm”FA–³Œø‰»(•K—v‚È‚ç‚Î)
+# (å‚è€ƒ)Nouveauãƒ‰ãƒ©ã‚¤ãƒãƒ¼ã®ç¢ºèªã€ç„¡åŠ¹åŒ–(å¿…è¦ãªã‚‰ã°)
 # URL: https://qiita.com/sasayabaku/items/2323a2c501e58c0621b6
 $ lsmod | grep -i nouveau
 $ gedit /etc/modprobe.d/blacklist-nouveau.conf
---- ’†g ---
+--- ä¸­èº« ---
 blacklist nouveau
 options nouveau modeset=0
 ------------
 sudo update-initramfs -u
 
 # --------------------------------------------------------
-# Ql2FCUI‚Ånvidia driverƒCƒ“ƒXƒg[ƒ‹(nomodeset‚Å‹N“®‚µ‚½‚Æ‚«)
+# å‚è€ƒ2ï¼šCUIã§nvidia driverã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«(nomodesetã§èµ·å‹•ã—ãŸã¨ã)
 # --------------------------------------------------------
-# CUIƒ‚[ƒh‚É
-ctl + alt + F3‚ÅCUI
+# CUIãƒ¢ãƒ¼ãƒ‰ã«
+ctl + alt + F3ã§CUI
 
-# GUI‚ğ’â~
+# GUIã‚’åœæ­¢
 $ systemctl isolate multi-user.target
 
-# nvidia driver‚ğíœ
+# nvidia driverã‚’å‰Šé™¤
 $ sudo apt --purge autoremove nvidia*
 
-# nvidia driver‚ğƒCƒ“ƒXƒg[ƒ‹
+# nvidia driverã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 $ sudo add-apt-repository ppa:graphics-drivers/ppa
 $ sudo apt update
 $ sudo apt install nvidia-driver-450
 
-# GUI‚ğ‹N“®
+# GUIã‚’èµ·å‹•
 $ systemctl start graphical.target
 
-#¡Ql
-# CUIˆÚ“®
+#â– å‚è€ƒ
+# CUIç§»å‹•
 # https://qastack.jp/ubuntu/1033206/switch-to-console-in-ubuntu-18-04-how-to-leave-gui
 
-# GUI‚ğ’â~
+# GUIã‚’åœæ­¢
 # https://codechacha.com/ja/install-nvidia-driver-ubuntu/
 
-# nvidia driverƒCƒ“ƒXƒg[ƒ‹
+# nvidia driverã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 # https://qiita.com/kawazu191128/items/8a46308be6949f5bda57
 
-# [Ubuntu]CUDA‚ğ“ü‚ê‚½‚ç‰æ–Ê‚ª^‚Á•‚É‚È‚Á‚½˜b
+# [Ubuntu]CUDAã‚’å…¥ã‚ŒãŸã‚‰ç”»é¢ãŒçœŸã£é»’ã«ãªã£ãŸè©±
 # https://qiita.com/mdo4nt6n/items/b439b81e7c10b95ee7c5
